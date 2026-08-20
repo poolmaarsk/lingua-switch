@@ -1,0 +1,1260 @@
+[
+  {
+    "tag": "am",
+    "flags": [
+      "ET"
+    ],
+    "countries": [
+      "ET"
+    ],
+    "countryNames": [
+      "Ethiopia"
+    ]
+  },
+  {
+    "tag": "ar",
+    "flags": [
+      "EG",
+      "SA",
+      "DZ"
+    ],
+    "countries": [
+      "AE",
+      "BH",
+      "DZ",
+      "EG",
+      "EH",
+      "IQ",
+      "JO",
+      "KM",
+      "KW",
+      "LB",
+      "LY",
+      "MA",
+      "MR",
+      "OM",
+      "PS",
+      "QA",
+      "SA",
+      "SD",
+      "SY",
+      "TN",
+      "YE"
+    ],
+    "countryNames": [
+      "United Arab Emirates",
+      "Bahrain",
+      "Algeria",
+      "Egypt",
+      "Western Sahara",
+      "Iraq",
+      "Jordan",
+      "Comoros",
+      "Kuwait",
+      "Lebanon",
+      "Libya",
+      "Morocco",
+      "Mauritania",
+      "Oman",
+      "Palestine, State of",
+      "Qatar",
+      "Saudi Arabia",
+      "Sudan",
+      "Syrian Arab Republic",
+      "Tunisia",
+      "Yemen"
+    ]
+  },
+  {
+    "tag": "az",
+    "flags": [
+      "AZ"
+    ],
+    "countries": [
+      "AZ"
+    ],
+    "countryNames": [
+      "Azerbaijan"
+    ]
+  },
+  {
+    "tag": "be",
+    "flags": [
+      "BY"
+    ],
+    "countries": [
+      "BY"
+    ],
+    "countryNames": [
+      "Belarus"
+    ]
+  },
+  {
+    "tag": "bg",
+    "flags": [
+      "BG"
+    ],
+    "countries": [
+      "BG"
+    ],
+    "countryNames": [
+      "Bulgaria"
+    ]
+  },
+  {
+    "tag": "bi",
+    "flags": [
+      "VU"
+    ],
+    "countries": [
+      "VU"
+    ],
+    "countryNames": [
+      "Vanuatu"
+    ]
+  },
+  {
+    "tag": "bn",
+    "flags": [
+      "BD"
+    ],
+    "countries": [
+      "BD"
+    ],
+    "countryNames": [
+      "Bangladesh"
+    ]
+  },
+  {
+    "tag": "bs",
+    "flags": [
+      "BA"
+    ],
+    "countries": [
+      "BA"
+    ],
+    "countryNames": [
+      "Bosnia and Herzegovina"
+    ]
+  },
+  {
+    "tag": "ca",
+    "flags": [
+      "AD"
+    ],
+    "countries": [
+      "AD"
+    ],
+    "countryNames": [
+      "Andorra"
+    ]
+  },
+  {
+    "tag": "cs",
+    "flags": [
+      "CZ"
+    ],
+    "countries": [
+      "CZ"
+    ],
+    "countryNames": [
+      "Czechia"
+    ]
+  },
+  {
+    "tag": "da",
+    "flags": [
+      "DK"
+    ],
+    "countries": [
+      "DK"
+    ],
+    "countryNames": [
+      "Denmark"
+    ]
+  },
+  {
+    "tag": "de",
+    "flags": [
+      "DE",
+      "AT",
+      "CH"
+    ],
+    "countries": [
+      "AT",
+      "CH",
+      "DE",
+      "LI"
+    ],
+    "countryNames": [
+      "Austria",
+      "Switzerland",
+      "Germany",
+      "Liechtenstein"
+    ]
+  },
+  {
+    "tag": "dv",
+    "flags": [
+      "MV"
+    ],
+    "countries": [
+      "MV"
+    ],
+    "countryNames": [
+      "Maldives"
+    ]
+  },
+  {
+    "tag": "dz",
+    "flags": [
+      "BT"
+    ],
+    "countries": [
+      "BT"
+    ],
+    "countryNames": [
+      "Bhutan"
+    ]
+  },
+  {
+    "tag": "el",
+    "flags": [
+      "GR",
+      "CY"
+    ],
+    "countries": [
+      "CY",
+      "GR"
+    ],
+    "countryNames": [
+      "Cyprus",
+      "Greece"
+    ]
+  },
+  {
+    "tag": "en",
+    "flags": [
+      "US",
+      "GB",
+      "NG"
+    ],
+    "countries": [
+      "AG",
+      "AI",
+      "AS",
+      "AU",
+      "BB",
+      "BM",
+      "BS",
+      "BW",
+      "BZ",
+      "CA",
+      "CK",
+      "DM",
+      "FJ",
+      "FK",
+      "FM",
+      "GB",
+      "GD",
+      "GG",
+      "GH",
+      "GI",
+      "GM",
+      "GU",
+      "GY",
+      "IE",
+      "IM",
+      "JE",
+      "JM",
+      "KI",
+      "KN",
+      "KY",
+      "LC",
+      "LR",
+      "LS",
+      "MH",
+      "MP",
+      "MS",
+      "MU",
+      "MW",
+      "NA",
+      "NG",
+      "NR",
+      "NU",
+      "NZ",
+      "PG",
+      "PW",
+      "SB",
+      "SG",
+      "SH",
+      "SL",
+      "SS",
+      "SZ",
+      "TC",
+      "TK",
+      "TT",
+      "TV",
+      "UG",
+      "US",
+      "VC",
+      "VG",
+      "VI",
+      "ZA",
+      "ZM",
+      "ZW"
+    ],
+    "countryNames": [
+      "Antigua and Barbuda",
+      "Anguilla",
+      "American Samoa",
+      "Australia",
+      "Barbados",
+      "Bermuda",
+      "Bahamas",
+      "Botswana",
+      "Belize",
+      "Canada",
+      "Cook Islands",
+      "Dominica",
+      "Fiji",
+      "Falkland Islands (Malvinas)",
+      "Micronesia, Federated States of",
+      "United Kingdom of Great Britain and Northern Ireland",
+      "Grenada",
+      "Guernsey",
+      "Ghana",
+      "Gibraltar",
+      "Gambia",
+      "Guam",
+      "Guyana",
+      "Ireland",
+      "Isle of Man",
+      "Jersey",
+      "Jamaica",
+      "Kiribati",
+      "Saint Kitts and Nevis",
+      "Cayman Islands",
+      "Saint Lucia",
+      "Liberia",
+      "Lesotho",
+      "Marshall Islands",
+      "Northern Mariana Islands",
+      "Montserrat",
+      "Mauritius",
+      "Malawi",
+      "Namibia",
+      "Nigeria",
+      "Nauru",
+      "Niue",
+      "New Zealand",
+      "Papua New Guinea",
+      "Palau",
+      "Solomon Islands",
+      "Singapore",
+      "Saint Helena, Ascension and Tristan da Cunha",
+      "Sierra Leone",
+      "South Sudan",
+      "Eswatini",
+      "Turks and Caicos Islands",
+      "Tokelau",
+      "Trinidad and Tobago",
+      "Tuvalu",
+      "Uganda",
+      "United States of America",
+      "Saint Vincent and the Grenadines",
+      "Virgin Islands (British)",
+      "Virgin Islands (U.S.)",
+      "South Africa",
+      "Zambia",
+      "Zimbabwe"
+    ]
+  },
+  {
+    "tag": "es",
+    "flags": [
+      "MX",
+      "ES",
+      "AR"
+    ],
+    "countries": [
+      "AR",
+      "BO",
+      "CL",
+      "CO",
+      "CR",
+      "CU",
+      "DO",
+      "EC",
+      "ES",
+      "GQ",
+      "GT",
+      "HN",
+      "MX",
+      "NI",
+      "PA",
+      "PE",
+      "PR",
+      "PY",
+      "SV",
+      "UY",
+      "VE"
+    ],
+    "countryNames": [
+      "Argentina",
+      "Bolivia, Plurinational State of",
+      "Chile",
+      "Colombia",
+      "Costa Rica",
+      "Cuba",
+      "Dominican Republic",
+      "Ecuador",
+      "Spain",
+      "Equatorial Guinea",
+      "Guatemala",
+      "Honduras",
+      "Mexico",
+      "Nicaragua",
+      "Panama",
+      "Peru",
+      "Puerto Rico",
+      "Paraguay",
+      "El Salvador",
+      "Uruguay",
+      "Venezuela, Bolivarian Republic of"
+    ]
+  },
+  {
+    "tag": "et",
+    "flags": [
+      "EE"
+    ],
+    "countries": [
+      "EE"
+    ],
+    "countryNames": [
+      "Estonia"
+    ]
+  },
+  {
+    "tag": "fa",
+    "flags": [
+      "IR"
+    ],
+    "countries": [
+      "IR"
+    ],
+    "countryNames": [
+      "Iran, Islamic Republic of"
+    ]
+  },
+  {
+    "tag": "fi",
+    "flags": [
+      "FI"
+    ],
+    "countries": [
+      "FI"
+    ],
+    "countryNames": [
+      "Finland"
+    ]
+  },
+  {
+    "tag": "fil",
+    "flags": [
+      "PH"
+    ],
+    "countries": [
+      "PH"
+    ],
+    "countryNames": [
+      "Philippines"
+    ]
+  },
+  {
+    "tag": "fo",
+    "flags": [
+      "FO"
+    ],
+    "countries": [
+      "FO"
+    ],
+    "countryNames": [
+      "Faroe Islands"
+    ]
+  },
+  {
+    "tag": "fr",
+    "flags": [
+      "FR",
+      "CD",
+      "CI"
+    ],
+    "countries": [
+      "BF",
+      "BI",
+      "BJ",
+      "BL",
+      "CD",
+      "CF",
+      "CG",
+      "CI",
+      "CM",
+      "DJ",
+      "FR",
+      "GA",
+      "GF",
+      "GN",
+      "GP",
+      "HT",
+      "MC",
+      "MF",
+      "MG",
+      "ML",
+      "MQ",
+      "NC",
+      "NE",
+      "PF",
+      "PM",
+      "RE",
+      "RW",
+      "SC",
+      "SN",
+      "TD",
+      "TG",
+      "WF",
+      "YT"
+    ],
+    "countryNames": [
+      "Burkina Faso",
+      "Burundi",
+      "Benin",
+      "Saint Barthélemy",
+      "Congo, Democratic Republic of the",
+      "Central African Republic",
+      "Congo",
+      "Côte d'Ivoire",
+      "Cameroon",
+      "Djibouti",
+      "France",
+      "Gabon",
+      "French Guiana",
+      "Guinea",
+      "Guadeloupe",
+      "Haiti",
+      "Monaco",
+      "Saint Martin (French part)",
+      "Madagascar",
+      "Mali",
+      "Martinique",
+      "New Caledonia",
+      "Niger",
+      "French Polynesia",
+      "Saint Pierre and Miquelon",
+      "Réunion",
+      "Rwanda",
+      "Seychelles",
+      "Senegal",
+      "Chad",
+      "Togo",
+      "Wallis and Futuna",
+      "Mayotte"
+    ]
+  },
+  {
+    "tag": "he",
+    "flags": [
+      "IL"
+    ],
+    "countries": [
+      "IL"
+    ],
+    "countryNames": [
+      "Israel"
+    ]
+  },
+  {
+    "tag": "hi",
+    "flags": [
+      "IN"
+    ],
+    "countries": [
+      "IN"
+    ],
+    "countryNames": [
+      "India"
+    ]
+  },
+  {
+    "tag": "hr",
+    "flags": [
+      "HR"
+    ],
+    "countries": [
+      "HR"
+    ],
+    "countryNames": [
+      "Croatia"
+    ]
+  },
+  {
+    "tag": "hu",
+    "flags": [
+      "HU"
+    ],
+    "countries": [
+      "HU"
+    ],
+    "countryNames": [
+      "Hungary"
+    ]
+  },
+  {
+    "tag": "hy",
+    "flags": [
+      "AM"
+    ],
+    "countries": [
+      "AM"
+    ],
+    "countryNames": [
+      "Armenia"
+    ]
+  },
+  {
+    "tag": "id",
+    "flags": [
+      "ID"
+    ],
+    "countries": [
+      "ID"
+    ],
+    "countryNames": [
+      "Indonesia"
+    ]
+  },
+  {
+    "tag": "is",
+    "flags": [
+      "IS"
+    ],
+    "countries": [
+      "IS"
+    ],
+    "countryNames": [
+      "Iceland"
+    ]
+  },
+  {
+    "tag": "it",
+    "flags": [
+      "IT",
+      "SM"
+    ],
+    "countries": [
+      "IT",
+      "SM"
+    ],
+    "countryNames": [
+      "Italy",
+      "San Marino"
+    ]
+  },
+  {
+    "tag": "ja",
+    "flags": [
+      "JP"
+    ],
+    "countries": [
+      "JP"
+    ],
+    "countryNames": [
+      "Japan"
+    ]
+  },
+  {
+    "tag": "ka",
+    "flags": [
+      "GE"
+    ],
+    "countries": [
+      "GE"
+    ],
+    "countryNames": [
+      "Georgia"
+    ]
+  },
+  {
+    "tag": "kk",
+    "flags": [
+      "KZ"
+    ],
+    "countries": [
+      "KZ"
+    ],
+    "countryNames": [
+      "Kazakhstan"
+    ]
+  },
+  {
+    "tag": "kl",
+    "flags": [
+      "GL"
+    ],
+    "countries": [
+      "GL"
+    ],
+    "countryNames": [
+      "Greenland"
+    ]
+  },
+  {
+    "tag": "km",
+    "flags": [
+      "KH"
+    ],
+    "countries": [
+      "KH"
+    ],
+    "countryNames": [
+      "Cambodia"
+    ]
+  },
+  {
+    "tag": "ko",
+    "flags": [
+      "KR",
+      "KP"
+    ],
+    "countries": [
+      "KP",
+      "KR"
+    ],
+    "countryNames": [
+      "Korea, Democratic People's Republic of",
+      "Korea, Republic of"
+    ]
+  },
+  {
+    "tag": "ky",
+    "flags": [
+      "KG"
+    ],
+    "countries": [
+      "KG"
+    ],
+    "countryNames": [
+      "Kyrgyzstan"
+    ]
+  },
+  {
+    "tag": "la",
+    "flags": [
+      "VA"
+    ],
+    "countries": [
+      "VA"
+    ],
+    "countryNames": [
+      "Holy See"
+    ]
+  },
+  {
+    "tag": "lb",
+    "flags": [
+      "LU"
+    ],
+    "countries": [
+      "LU"
+    ],
+    "countryNames": [
+      "Luxembourg"
+    ]
+  },
+  {
+    "tag": "lo",
+    "flags": [
+      "LA"
+    ],
+    "countries": [
+      "LA"
+    ],
+    "countryNames": [
+      "Lao People's Democratic Republic"
+    ]
+  },
+  {
+    "tag": "lt",
+    "flags": [
+      "LT"
+    ],
+    "countries": [
+      "LT"
+    ],
+    "countryNames": [
+      "Lithuania"
+    ]
+  },
+  {
+    "tag": "lv",
+    "flags": [
+      "LV"
+    ],
+    "countries": [
+      "LV"
+    ],
+    "countryNames": [
+      "Latvia"
+    ]
+  },
+  {
+    "tag": "mk",
+    "flags": [
+      "MK"
+    ],
+    "countries": [
+      "MK"
+    ],
+    "countryNames": [
+      "North Macedonia"
+    ]
+  },
+  {
+    "tag": "mn",
+    "flags": [
+      "MN"
+    ],
+    "countries": [
+      "MN"
+    ],
+    "countryNames": [
+      "Mongolia"
+    ]
+  },
+  {
+    "tag": "ms",
+    "flags": [
+      "MY",
+      "BN"
+    ],
+    "countries": [
+      "BN",
+      "MY"
+    ],
+    "countryNames": [
+      "Brunei Darussalam",
+      "Malaysia"
+    ]
+  },
+  {
+    "tag": "mt",
+    "flags": [
+      "MT"
+    ],
+    "countries": [
+      "MT"
+    ],
+    "countryNames": [
+      "Malta"
+    ]
+  },
+  {
+    "tag": "my",
+    "flags": [
+      "MM"
+    ],
+    "countries": [
+      "MM"
+    ],
+    "countryNames": [
+      "Myanmar"
+    ]
+  },
+  {
+    "tag": "nb",
+    "flags": [
+      "NO"
+    ],
+    "countries": [
+      "NO"
+    ],
+    "countryNames": [
+      "Norway"
+    ]
+  },
+  {
+    "tag": "ne",
+    "flags": [
+      "NP"
+    ],
+    "countries": [
+      "NP"
+    ],
+    "countryNames": [
+      "Nepal"
+    ]
+  },
+  {
+    "tag": "nl",
+    "flags": [
+      "NL",
+      "BE",
+      "SR"
+    ],
+    "countries": [
+      "AW",
+      "BE",
+      "BQ",
+      "CW",
+      "NL",
+      "SR",
+      "SX"
+    ],
+    "countryNames": [
+      "Aruba",
+      "Belgium",
+      "Bonaire, Sint Eustatius and Saba",
+      "Curaçao",
+      "Netherlands, Kingdom of the",
+      "Suriname",
+      "Sint Maarten (Dutch part)"
+    ]
+  },
+  {
+    "tag": "pl",
+    "flags": [
+      "PL"
+    ],
+    "countries": [
+      "PL"
+    ],
+    "countryNames": [
+      "Poland"
+    ]
+  },
+  {
+    "tag": "ps",
+    "flags": [
+      "AF"
+    ],
+    "countries": [
+      "AF"
+    ],
+    "countryNames": [
+      "Afghanistan"
+    ]
+  },
+  {
+    "tag": "pt",
+    "flags": [
+      "BR",
+      "PT",
+      "AO"
+    ],
+    "countries": [
+      "AO",
+      "BR",
+      "CV",
+      "GW",
+      "MZ",
+      "PT",
+      "ST",
+      "TL"
+    ],
+    "countryNames": [
+      "Angola",
+      "Brazil",
+      "Cabo Verde",
+      "Guinea-Bissau",
+      "Mozambique",
+      "Portugal",
+      "Sao Tome and Principe",
+      "Timor-Leste"
+    ]
+  },
+  {
+    "tag": "ro",
+    "flags": [
+      "RO",
+      "MD"
+    ],
+    "countries": [
+      "MD",
+      "RO"
+    ],
+    "countryNames": [
+      "Moldova, Republic of",
+      "Romania"
+    ]
+  },
+  {
+    "tag": "ru",
+    "flags": [
+      "RU"
+    ],
+    "countries": [
+      "RU"
+    ],
+    "countryNames": [
+      "Russian Federation"
+    ]
+  },
+  {
+    "tag": "si",
+    "flags": [
+      "LK"
+    ],
+    "countries": [
+      "LK"
+    ],
+    "countryNames": [
+      "Sri Lanka"
+    ]
+  },
+  {
+    "tag": "sk",
+    "flags": [
+      "SK"
+    ],
+    "countries": [
+      "SK"
+    ],
+    "countryNames": [
+      "Slovakia"
+    ]
+  },
+  {
+    "tag": "sl",
+    "flags": [
+      "SI"
+    ],
+    "countries": [
+      "SI"
+    ],
+    "countryNames": [
+      "Slovenia"
+    ]
+  },
+  {
+    "tag": "sm",
+    "flags": [
+      "WS"
+    ],
+    "countries": [
+      "WS"
+    ],
+    "countryNames": [
+      "Samoa"
+    ]
+  },
+  {
+    "tag": "so",
+    "flags": [
+      "SO"
+    ],
+    "countries": [
+      "SO"
+    ],
+    "countryNames": [
+      "Somalia"
+    ]
+  },
+  {
+    "tag": "sq",
+    "flags": [
+      "AL"
+    ],
+    "countries": [
+      "AL"
+    ],
+    "countryNames": [
+      "Albania"
+    ]
+  },
+  {
+    "tag": "sr",
+    "flags": [
+      "RS",
+      "ME"
+    ],
+    "countries": [
+      "ME",
+      "RS"
+    ],
+    "countryNames": [
+      "Montenegro",
+      "Serbia"
+    ]
+  },
+  {
+    "tag": "sv",
+    "flags": [
+      "SE",
+      "AX"
+    ],
+    "countries": [
+      "AX",
+      "SE"
+    ],
+    "countryNames": [
+      "Åland Islands",
+      "Sweden"
+    ]
+  },
+  {
+    "tag": "sw",
+    "flags": [
+      "TZ",
+      "KE"
+    ],
+    "countries": [
+      "KE",
+      "TZ"
+    ],
+    "countryNames": [
+      "Kenya",
+      "Tanzania, United Republic of"
+    ]
+  },
+  {
+    "tag": "tg",
+    "flags": [
+      "TJ"
+    ],
+    "countries": [
+      "TJ"
+    ],
+    "countryNames": [
+      "Tajikistan"
+    ]
+  },
+  {
+    "tag": "th",
+    "flags": [
+      "TH"
+    ],
+    "countries": [
+      "TH"
+    ],
+    "countryNames": [
+      "Thailand"
+    ]
+  },
+  {
+    "tag": "ti",
+    "flags": [
+      "ER"
+    ],
+    "countries": [
+      "ER"
+    ],
+    "countryNames": [
+      "Eritrea"
+    ]
+  },
+  {
+    "tag": "tk",
+    "flags": [
+      "TM"
+    ],
+    "countries": [
+      "TM"
+    ],
+    "countryNames": [
+      "Turkmenistan"
+    ]
+  },
+  {
+    "tag": "to",
+    "flags": [
+      "TO"
+    ],
+    "countries": [
+      "TO"
+    ],
+    "countryNames": [
+      "Tonga"
+    ]
+  },
+  {
+    "tag": "tr",
+    "flags": [
+      "TR"
+    ],
+    "countries": [
+      "TR"
+    ],
+    "countryNames": [
+      "Türkiye"
+    ]
+  },
+  {
+    "tag": "uk",
+    "flags": [
+      "UA"
+    ],
+    "countries": [
+      "UA"
+    ],
+    "countryNames": [
+      "Ukraine"
+    ]
+  },
+  {
+    "tag": "ur",
+    "flags": [
+      "PK"
+    ],
+    "countries": [
+      "PK"
+    ],
+    "countryNames": [
+      "Pakistan"
+    ]
+  },
+  {
+    "tag": "uz",
+    "flags": [
+      "UZ"
+    ],
+    "countries": [
+      "UZ"
+    ],
+    "countryNames": [
+      "Uzbekistan"
+    ]
+  },
+  {
+    "tag": "vi",
+    "flags": [
+      "VN"
+    ],
+    "countries": [
+      "VN"
+    ],
+    "countryNames": [
+      "Viet Nam"
+    ]
+  },
+  {
+    "tag": "zh",
+    "flags": [
+      "CN",
+      "TW",
+      "HK"
+    ],
+    "countries": [
+      "CN",
+      "HK",
+      "MO",
+      "TW"
+    ],
+    "countryNames": [
+      "China",
+      "Hong Kong",
+      "Macao",
+      "Taiwan, Province of China"
+    ]
+  }
+]

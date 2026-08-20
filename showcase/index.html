@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lingua-switch</title>
+<meta name="description" content="Embeddable <language-picker> web component with translated-name/endonym pairs, curated flags, and locale-aware sorting.">
+<link rel="canonical" href="https://linguaswitch.poolmaarsk.eu/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="lingua-switch">
+<meta property="og:description" content="Embeddable <language-picker> web component with translated-name/endonym pairs, curated flags, and locale-aware sorting.">
+<meta property="og:url" content="https://linguaswitch.poolmaarsk.eu/">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="lingua-switch">
+<meta name="twitter:description" content="Embeddable <language-picker> web component with translated-name/endonym pairs, curated flags, and locale-aware sorting.">
+<style>
+  :root {
+    --bg: #f6f6f4;
+    --surface: #ffffff;
+    --card: #ffffff;
+    --border: #e2e2dc;
+    --border-strong: #c9c9c1;
+    --text: #1a1a18;
+    --text-secondary: #5c5c54;
+    --text-muted: #8a8a80;
+    --accent: #185fa5;
+    --accent-fg: #ffffff;
+    --code-bg: #f0efe9;
+    --shadow: 0 1px 2px rgba(20,20,15,.06), 0 8px 24px rgba(20,20,15,.06);
+    --radius-lg: 16px;
+    --radius-md: 10px;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] {
+    --bg: #14161a;
+    --surface: #1b1e24;
+    --card: #20242b;
+    --border: #2d323b;
+    --border-strong: #3d4450;
+    --text: #ecedee;
+    --text-secondary: #a3a9b3;
+    --text-muted: #767d89;
+    --accent: #60a5fa;
+    --accent-fg: #0b1220;
+    --code-bg: #171a1f;
+    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #14161a;
+      --surface: #1b1e24;
+      --card: #20242b;
+      --border: #2d323b;
+      --border-strong: #3d4450;
+      --text: #ecedee;
+      --text-secondary: #a3a9b3;
+      --text-muted: #767d89;
+      --accent: #60a5fa;
+      --accent-fg: #0b1220;
+      --code-bg: #171a1f;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 12px 32px rgba(0,0,0,.35);
+      color-scheme: dark;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.55;
+  }
+  a { color: var(--accent); }
+
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 1.25rem; }
+
+  header.top {
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .top-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 1rem; padding: 1.1rem 0;
+  }
+  .brand { display: flex; align-items: baseline; gap: 0.6rem; }
+  .brand-name { font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em; }
+  .brand-tag { font-size: 0.85rem; color: var(--text-muted); display: none; }
+  @media (min-width: 640px) { .brand-tag { display: inline; } }
+
+  .header-actions { display: flex; align-items: center; gap: 0.6rem; }
+  .theme-toggle {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.5rem 0.9rem; border-radius: 999px;
+    border: 1px solid var(--border-strong); background: var(--card);
+    color: var(--text); font-size: 0.85rem; cursor: pointer;
+    text-decoration: none; font-family: inherit;
+  }
+  .theme-toggle:hover { background: var(--code-bg); }
+
+  .hero { padding: 3rem 0 2.5rem; }
+  .hero h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin: 0 0 0.6rem; letter-spacing: -0.015em; }
+  .hero p { font-size: 1.05rem; color: var(--text-secondary); max-width: 60ch; margin: 0 0 1.4rem; }
+  .hero-links { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .pill {
+    font-size: 0.8rem; padding: 0.35rem 0.75rem; border-radius: 999px;
+    background: var(--code-bg); color: var(--text-secondary); border: 1px solid var(--border);
+  }
+
+  section.demo { padding: 2.2rem 0; border-top: 1px solid var(--border); }
+  section.demo:first-of-type { border-top: none; }
+  .demo-head { margin-bottom: 1.3rem; }
+  .demo-kicker {
+    font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--accent); font-weight: 700; margin: 0 0 0.4rem;
+  }
+  .demo-head h2 { font-size: 1.4rem; margin: 0 0 0.5rem; letter-spacing: -0.01em; }
+  .demo-head p { color: var(--text-secondary); max-width: 68ch; margin: 0; font-size: 0.97rem; }
+
+  .card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); box-shadow: var(--shadow);
+    padding: 1.4rem;
+  }
+
+  .addressbar {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 999px; padding: 0.5rem 0.9rem; margin-top: 1.1rem;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.82rem; color: var(--text-secondary); overflow-x: auto; white-space: nowrap;
+  }
+  .addressbar .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot.r { background: #f0524d; } .dot.y { background: #f4b23e; } .dot.g { background: #2fae5e; }
+  .addressbar code { color: var(--text); }
+
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 720px) { .grid2 { grid-template-columns: 1fr 1fr; align-items: start; } }
+
+  .modes-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; }
+  @media (min-width: 780px) { .modes-grid { grid-template-columns: repeat(3, 1fr); } }
+  .mode-card h3 { margin: 0 0 0.25rem; font-size: 1rem; }
+  .mode-card .mode-attr { font-size: 0.78rem; color: var(--text-muted); margin: 0 0 0.9rem; }
+  .mode-card .mode-attr code { background: var(--code-bg); padding: 0.1rem 0.4rem; border-radius: 4px; }
+  .mode-result {
+    margin-top: 0.9rem; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.78rem; background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 0.6rem 0.7rem; color: var(--text-secondary);
+    min-height: 2.6em; white-space: pre-wrap; word-break: break-all;
+  }
+  .mode-result .val { color: var(--text); }
+
+  pre.snippet {
+    background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius-md);
+    padding: 0.9rem 1rem; overflow-x: auto; font-size: 0.82rem; line-height: 1.5;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; color: var(--text);
+    margin: 0;
+  }
+  .snippet .tag { color: var(--accent); }
+  .snippet .attr { color: #8a6d3b; }
+  .snippet .val { color: #3b7d3b; }
+  :root[data-theme="dark"] .snippet .val { color: #7fc97f; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .snippet .val { color: #7fc97f; }
+  }
+  :root[data-theme="dark"] .snippet .attr { color: #e0b567; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .snippet .attr { color: #e0b567; }
+  }
+
+  .stat-row { display: flex; gap: 1.4rem; flex-wrap: wrap; margin-top: 1.1rem; }
+  .stat { min-width: 90px; }
+  .stat .n { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.01em; }
+  .stat .l { font-size: 0.78rem; color: var(--text-muted); }
+
+  .note {
+    font-size: 0.82rem; color: var(--text-muted); margin-top: 0.9rem;
+    padding-top: 0.9rem; border-top: 1px dashed var(--border);
+  }
+
+  footer { border-top: 1px solid var(--border); padding: 2rem 0 3rem; }
+  footer p { color: var(--text-muted); font-size: 0.85rem; margin: 0.3rem 0; }
+  footer a { color: var(--text-secondary); text-decoration: none; }
+  footer a:hover { text-decoration: underline; }
+
+  .sr-only {
+    position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0);
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">
+      <span class="brand-name">lingua-switch</span>
+      <span class="brand-tag">embeddable language picker</span>
+    </div>
+    <div class="header-actions">
+      <a class="theme-toggle" href="https://github.com/poolmaarsk/lingua-switch">
+        <span aria-hidden="true">★</span> GitHub
+      </a>
+      <button type="button" class="theme-toggle" id="theme-toggle" aria-pressed="false">
+        <span id="theme-toggle-icon" aria-hidden="true">🌙</span>
+        <span id="theme-toggle-label">Dark mode</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <h1>A language picker that shows both names, not just a flag</h1>
+    <p>Every entry pairs the language's name <em>translated into whatever you're currently reading</em> with its own
+    endonym — plus curated flags, locale-aware alphabetical sorting, and full ARIA combobox support. Zero runtime
+    dependencies, MIT licensed.</p>
+    <div class="hero-links">
+      <span class="pill">MIT licensed</span>
+      <span class="pill">Zero dependencies</span>
+      <span class="pill">76 languages built in</span>
+      <span class="pill">~38KB subset, sk+en+de</span>
+    </div>
+  </section>
+
+  <section class="demo" id="real-world">
+    <div class="demo-head">
+      <p class="demo-kicker">01 — Real-world example</p>
+      <h2>Three languages, the way most sites actually ship it</h2>
+      <p>Flags off (text alone is always enough), <code>mode="path-prefix"</code>. Try switching — the address bar
+      below updates to show exactly what URL a real host would navigate to.</p>
+    </div>
+    <div class="card">
+      <language-picker
+        id="picker-real"
+        langs="sk,en,de"
+        current="sk"
+        mode="none"
+      ></language-picker>
+      <div class="addressbar" id="real-addressbar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <code>yoursite.example.com/sk/</code>
+      </div>
+      <p class="note">This page never actually navigates — every example on this showcase runs
+      <code>mode="none"</code> under the hood and simulates the address bar, so you can try all three sections
+      without losing your place.</p>
+    </div>
+  </section>
+
+  <section class="demo" id="full-scale">
+    <div class="demo-head">
+      <p class="demo-kicker">02 — Full scale</p>
+      <h2>All 76 built-in languages, flags on</h2>
+      <p>Up to three curated flags per language, right-to-left script support, and sorting that follows each
+      language's own alphabet — Slovak's "č" lands right after every "c" word, not at the end.</p>
+    </div>
+    <div class="card">
+      <language-picker
+        id="picker-full"
+        langs="am,ar,az,be,bg,bi,bn,bs,ca,cs,da,de,dv,dz,el,en,es,et,fa,fi,fil,fo,fr,he,hi,hr,hu,hy,id,is,it,ja,ka,kk,kl,km,ko,ky,la,lb,lo,lt,lv,mk,mn,ms,mt,my,nb,ne,nl,pl,ps,pt,ro,ru,si,sk,sl,sm,so,sq,sr,sv,sw,tg,th,ti,tk,to,tr,uk,ur,uz,vi,zh"
+        current="en"
+        mode="none"
+        show-flags="true"
+      ></language-picker>
+      <p class="note" id="full-scale-status" style="margin-top: 1rem; padding-top: 0; border-top: none;">
+        Names currently translated into: <strong>English</strong>. Pick a language above — the whole list
+        re-sorts and re-translates into whatever you choose.
+      </p>
+      <div class="stat-row">
+        <div class="stat"><div class="n">76</div><div class="l">languages</div></div>
+        <div class="stat"><div class="n">16</div><div class="l">hand-curated multi-flag entries</div></div>
+        <div class="stat"><div class="n">~38KB</div><div class="l">real bundle for 3 languages</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="modes">
+    <div class="demo-head">
+      <p class="demo-kicker">03 — Output modes, side by side</p>
+      <h2>Pick a language in each — see exactly what happens</h2>
+      <p>Three built-in strategies for turning a selection into a URL change (or nothing at all). Try the same
+      language in each card and compare the result below it.</p>
+    </div>
+    <div class="modes-grid">
+      <div class="card mode-card">
+        <h3>path-prefix</h3>
+        <p class="mode-attr">Default. <code>mode="path-prefix"</code></p>
+        <language-picker id="picker-mode-path" langs="sk,en,de" current="sk" mode="none"></language-picker>
+        <div class="mode-result" id="result-path">Pick a language above.</div>
+      </div>
+      <div class="card mode-card">
+        <h3>query-param</h3>
+        <p class="mode-attr"><code>mode="query-param"</code></p>
+        <language-picker id="picker-mode-query" langs="sk,en,de" current="sk" mode="none"></language-picker>
+        <div class="mode-result" id="result-query">Pick a language above.</div>
+      </div>
+      <div class="card mode-card">
+        <h3>none</h3>
+        <p class="mode-attr">Full custom routing. <code>mode="none"</code></p>
+        <language-picker id="picker-mode-none" langs="sk,en,de" current="sk" mode="none"></language-picker>
+        <div class="mode-result" id="result-none">Pick a language above.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="demo" id="use-it">
+    <div class="demo-head">
+      <p class="demo-kicker">Using it</p>
+      <h2>Drop-in, no build step required</h2>
+    </div>
+    <div class="grid2">
+      <pre class="snippet"><span class="tag">&lt;script</span> <span class="attr">type</span>=<span class="val">"module"</span> <span class="attr">src</span>=<span class="val">"/language-picker/language-picker.mjs"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;language-picker</span>
+  <span class="attr">langs</span>=<span class="val">"sk,en,de"</span>
+  <span class="attr">current</span>=<span class="val">"en"</span>
+  <span class="attr">mode</span>=<span class="val">"path-prefix"</span>
+<span class="tag">&gt;&lt;/language-picker&gt;</span></pre>
+      <div class="card" style="padding: 1.2rem 1.4rem;">
+        <p style="margin: 0 0 0.6rem; font-weight: 600; font-size: 0.92rem;">Ships a minimal bundle</p>
+        <p style="margin: 0 0 0.9rem; color: var(--text-secondary); font-size: 0.9rem;">The subsetting CLI builds
+        only what a given <code>langs</code> list needs — data, flags, and modules — mirroring this exact usage.</p>
+        <pre class="snippet" style="font-size: 0.78rem;">node scripts/subset.mjs \
+  --langs sk,en,de \
+  --out ./dist/language-picker</pre>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    <p><strong>lingua-switch</strong> — MIT licensed. Source, issues, and the full design
+    notes: <a href="https://github.com/poolmaarsk/lingua-switch">github.com/poolmaarsk/lingua-switch</a>.</p>
+    <p>Country data derived from a CC BY-SA 4.0 source (see
+    <code>src/data/vendor/SOURCE.md</code>). Flags from flagcdn.com, public domain.</p>
+    <p>Try the toggle in the header — it flips <code>&lt;html data-theme&gt;</code>, and every picker on this page
+    follows it live, automatically, with zero extra wiring.</p>
+  </div>
+</footer>
+
+<script type="module" src="/src/language-picker.mjs"></script>
+<script type="module">
+  import { pathPrefixHref, queryParamHref } from '/src/url-strategies.mjs';
+
+  // Theme toggle — mirrors plug-cost's <html data-theme> convention.
+  // Every <language-picker> on this page picks this up live via its own
+  // built-in MutationObserver sync, no extra code needed per-instance.
+  const root = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
+  const icon = document.getElementById('theme-toggle-icon');
+  const label = document.getElementById('theme-toggle-label');
+  const STORAGE_KEY = 'lingua-switch-showcase-theme';
+
+  function systemPrefersDark() {
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  }
+  function applyTheme(theme) {
+    root.setAttribute('data-theme', theme);
+    const isDark = theme === 'dark';
+    toggle.setAttribute('aria-pressed', String(isDark));
+    icon.textContent = isDark ? '☀️' : '🌙';
+    label.textContent = isDark ? 'Light mode' : 'Dark mode';
+  }
+  const saved = localStorage.getItem(STORAGE_KEY);
+  applyTheme(saved || (systemPrefersDark() ? 'dark' : 'light'));
+  toggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    applyTheme(next);
+    localStorage.setItem(STORAGE_KEY, next);
+  });
+
+  // Section 1 — real-world example: simulate the address bar.
+  const realPicker = document.getElementById('picker-real');
+  const realBar = document.getElementById('real-addressbar');
+  realPicker.addEventListener('language-select', (e) => {
+    const href = pathPrefixHref('/', '', e.detail.tag, ['sk', 'en', 'de']);
+    realBar.querySelector('code').textContent = `yoursite.example.com${href}`;
+    realPicker.setAttribute('current', e.detail.tag);
+  });
+
+  // Section 2 — full scale: apply the pick as `current` so the whole
+  // list actually re-translates/re-sorts, and show which language that
+  // is (endonym) so it's obvious something happened.
+  const fullPicker = document.getElementById('picker-full');
+  const fullStatus = document.getElementById('full-scale-status');
+  fullPicker.addEventListener('language-select', (e) => {
+    fullPicker.setAttribute('current', e.detail.tag);
+    fullStatus.innerHTML = `Names currently translated into: <strong>${e.detail.endonym}</strong>. Pick a language above — the whole list re-sorts and re-translates into whatever you choose.`;
+  });
+
+  // Section 3 — mode comparison, computed with the same pure functions
+  // the component itself uses, no real navigation on this page.
+  function wireModeCard(pickerId, resultId, computeMode) {
+    const picker = document.getElementById(pickerId);
+    const result = document.getElementById(resultId);
+    picker.addEventListener('language-select', (e) => {
+      picker.setAttribute('current', e.detail.tag);
+      const text = computeMode(e.detail);
+      result.innerHTML = text;
+    });
+  }
+  wireModeCard('picker-mode-path', 'result-path', (detail) => {
+    const href = pathPrefixHref('/showcase/', '', detail.tag, ['sk', 'en', 'de']);
+    return `Would navigate to:\n<span class="val">${href}</span>`;
+  });
+  wireModeCard('picker-mode-query', 'result-query', (detail) => {
+    const href = queryParamHref('/showcase/', '', detail.tag);
+    return `Would navigate to:\n<span class="val">${href}</span>`;
+  });
+  wireModeCard('picker-mode-none', 'result-none', (detail) => {
+    return `language-select event fired, no navigation:\n<span class="val">${JSON.stringify(detail)}</span>`;
+  });
+</script>
+</body>
+</html>

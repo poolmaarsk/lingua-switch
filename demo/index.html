@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>lingua-switch manual test page</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 640px; margin: 3rem auto; padding: 0 1rem; }
+  h1 { font-size: 1.4rem; }
+  .row { margin: 1.5rem 0; }
+  code { background: #f0f0ee; padding: 0.1em 0.4em; border-radius: 3px; }
+  #log { font-family: monospace; font-size: 0.85rem; background: #f6f6f2; border: 1px solid #ddd; padding: 0.75rem; white-space: pre-wrap; min-height: 3em; }
+</style>
+</head>
+<body>
+  <h1 id="heading">欢迎 — lingua-switch manual test</h1>
+  <p>All 76 built-in languages are loaded below, flags on
+  (<code>show-flags="true"</code>). Page starts with <code>lang="zh"</code>
+  on purpose, to exercise the trigger-label case from DESIGN.md §8
+  (visitor reads Slovak/English, page is in Chinese). Currently set to
+  <code>mode="query-param"</code>, so picking a language does a
+  <strong>real navigation</strong> to <code>?lang=xx</code> — this page
+  restores <code>current</code> from that query param on load, below,
+  which a <code>mode="query-param"</code> host must always do itself (the
+  component only computes the href and navigates to it; it doesn't
+  remember anything across a reload — see README.md's "never remembers a
+  selection" note).</p>
+
+  <div class="row">
+    <language-picker
+      langs="am,ar,az,be,bg,bi,bn,bs,ca,cs,da,de,dv,dz,el,en,es,et,fa,fi,fil,fo,fr,he,hi,hr,hu,hy,id,is,it,ja,ka,kk,kl,km,ko,ky,la,lb,lo,lt,lv,mk,mn,ms,mt,my,nb,ne,nl,pl,ps,pt,ro,ru,si,sk,sl,sm,so,sq,sr,sv,sw,tg,th,ti,tk,to,tr,uk,ur,uz,vi,zh"
+      current="zh"
+      mode="query-param"
+      show-flags="true"
+    ></language-picker>
+  </div>
+
+  <p>Last <code>language-select</code> event:</p>
+  <div id="log">(none yet)</div>
+
+  <script>
+    // Runs before the module script below, and before the custom element
+    // upgrades — so setting `current` here is picked up on first render,
+    // not after. This is the bootstrap a mode="path-prefix" host does
+    // from its own URL/routing, and a mode="query-param" host does from
+    // location.search, same idea.
+    (() => {
+      const picker = document.querySelector('language-picker');
+      const lang = new URLSearchParams(location.search).get('lang');
+      if (lang && picker.getAttribute('langs').split(',').includes(lang)) {
+        picker.setAttribute('current', lang);
+        document.documentElement.lang = lang;
+        document.getElementById('heading').textContent = `Now viewing in: ${lang}`;
+      }
+    })();
+  </script>
+  <script type="module" src="/src/language-picker.mjs"></script>
+  <script type="module">
+    const picker = document.querySelector('language-picker');
+    const log = document.getElementById('log');
+    picker.addEventListener('language-select', (e) => {
+      log.textContent = JSON.stringify(e.detail, null, 2);
+
+      // For mode="none" a host must apply the chosen language itself —
+      // the component only fires the event, it never navigates. For
+      // path-prefix/query-param (this demo's current mode) the component
+      // already navigates on its own; the bootstrap script above is what
+      // restores that choice after the reload actually lands.
+      document.documentElement.lang = e.detail.tag;
+      picker.setAttribute('current', e.detail.tag);
+      document.getElementById('heading').textContent = `Now viewing in: ${e.detail.endonym}`;
+    });
+  </script>
+</body>
+</html>

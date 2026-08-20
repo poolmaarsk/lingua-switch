@@ -1,0 +1,50 @@
+{
+  "name": "@poolmaarsk/lingua-switch",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "lingua-switch — embeddable <language-picker> web component with translated-name/endonym pairs, curated flags, and locale-aware sorting.",
+  "keywords": [
+    "language-picker",
+    "language-switcher",
+    "web-component",
+    "custom-element",
+    "i18n",
+    "l10n"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/poolmaarsk/lingua-switch.git"
+  },
+  "homepage": "https://linguaswitch.poolmaarsk.eu/",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./src/language-picker.mjs",
+  "exports": "./src/language-picker.mjs",
+  "sideEffects": [
+    "./src/language-picker.mjs"
+  ],
+  "files": [
+    "src/language-picker.mjs",
+    "src/match.mjs",
+    "src/display-names.mjs",
+    "src/url-strategies.mjs",
+    "src/rtl.mjs",
+    "src/trigger-label.mjs",
+    "src/generated",
+    "src/assets/flags",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build:data": "node scripts/build-country-data.mjs && node scripts/build-languages.mjs && node scripts/build-language-names.mjs && node scripts/build-region-names.mjs",
+    "test": "node --test test/*.test.mjs",
+    "dev": "node scripts/dev-server.mjs",
+    "optimize:flags": "node scripts/optimize-flags.mjs",
+    "subset": "node scripts/subset.mjs",
+    "build:public": "node scripts/build-public.mjs"
+  },
+  "devDependencies": {
+    "svgo": "^4.0.2"
+  }
+}
