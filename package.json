@@ -25,6 +25,9 @@
   "sideEffects": [
     "./src/language-picker.mjs"
   ],
+  "bin": {
+    "lingua-switch-subset": "scripts/subset.mjs"
+  },
   "files": [
     "src/language-picker.mjs",
     "src/match.mjs",
@@ -34,6 +37,7 @@
     "src/trigger-label.mjs",
     "src/generated",
     "src/assets/flags",
+    "scripts/subset.mjs",
     "LICENSE"
   ],
   "scripts": {
