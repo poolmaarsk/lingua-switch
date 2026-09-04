@@ -652,4 +652,8 @@ hrefs at once.
 5. ✅ Custom-element packaging and the subsetting CLI (`scripts/subset.mjs`)
 
 What's left is narrower now: plug-cost as the first real consumer
-(deliberately deferred), and npm publishing.
+(deliberately deferred), and npm publishing — package.json is fully
+prepared (`@poolmaarsk/lingua-switch`, dry-run verified clean) but the
+actual `npm publish` is blocked on the publishing account's own 2FA
+setup, not on anything in this repo. See README.md's Status section for
+the exact error and fix.

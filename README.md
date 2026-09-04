@@ -181,8 +181,20 @@ theming — CSS custom properties cross the shadow boundary, plus
 automatic `prefers-color-scheme` + live `<html data-theme>` sync (see
 "Theming, light/dark mode" above).
 
-Not started: npm publishing, and using this in plug-cost (deliberately
-deferred).
+**npm package prepared but not yet published.** `package.json` is fully
+set up — scoped as `@poolmaarsk/lingua-switch` (the unscoped
+`lingua-switch` name is already taken by an unrelated package),
+`publishConfig.access: "public"`, `exports`/`main`/`sideEffects` set,
+`files` allowlisted to exactly the runtime surface. `npm publish
+--dry-run` confirms a clean 113-file, ~454KB package with no warnings.
+Actual `npm publish` was attempted and failed:
+`403 Forbidden — Two-factor authentication or granular access token
+with bypass 2FA enabled is required to publish packages`. This is an
+npm *account* security policy, nothing to fix in this repo — needs 2FA
+enabled on the publishing npm account (or a granular access token with
+2FA bypass), then `npm publish` again.
+
+Not started: using this in plug-cost (deliberately deferred).
 
 Known, deliberately deferred: at full 76-language scale with all 76 also
 used as the UI-language set, searching a short 2-letter code like `sk`

@@ -108,7 +108,19 @@ function defaultFlagUrl(code) {
 // --lp-bg etc. on the <language-picker> element itself; the normal CSS
 // cascade handles that without needing var()-with-self-fallback at all.
 const STYLE = `
-:host {
+/* Token defaults live in a :where(:host) rule — zero specificity — so
+   ANY host-side override wins the cascade, down to a bare tag selector
+   like "language-picker { --lp-bg: ... }". Without :where(), a plain
+   :host { --lp-bg: ...} rule already carries (0,1,0) specificity, and
+   the per-theme variants below carry even more ([data-theme="..."]
+   adds an attribute selector) — a host reaching for anything less
+   specific than an ID selector would silently lose to these internal
+   defaults. See CLAUDE.md/DESIGN.md for the plug-cost integration that
+   surfaced this (dark mode silently ignored a class-based host
+   override; only an ID-anchored one won). Structural layout (font,
+   position, display) stays in a normal :host rule below — those aren't
+   meant to be swapped by theme and don't need the same treatment. */
+:where(:host) {
   --lp-bg: #ffffff;
   --lp-surface: #f4f4f2;
   --lp-card-bg: #ffffff;
@@ -121,6 +133,8 @@ const STYLE = `
   --lp-hover-bg: #eef3f8;
   --lp-selected-bg: #e6f1fb;
   --lp-radius: 8px;
+}
+:host {
   font-family: var(--lp-font, system-ui, sans-serif);
   position: relative;
   display: inline-block;
@@ -129,14 +143,16 @@ const STYLE = `
    convention plug-cost already uses (pages/CLAUDE.md flags this as the
    first real candidate for code shared between the two projects):
    1. OS-level preference, automatic, no host wiring needed.
-   2. Explicit :host([data-theme="..."]) attribute, which always wins
-      over #1 (an attribute selector outranks a bare :host one,
-      regardless of source order) — for a host with its own manual
-      toggle (like plug-cost's) to force a specific theme instead of
-      following the OS. See _syncHostTheme() for how the attribute gets
+   2. Explicit :host([data-theme="..."]) attribute — wrapped in :where()
+      like the base rule above, so precedence between these three is
+      decided by source order (below: base, then OS-preference, then
+      explicit attribute, so an explicit attribute always wins over the
+      OS default) rather than by selector specificity, keeping a host
+      override able to beat all three regardless of which one would
+      otherwise apply. See _syncHostTheme() for how the attribute gets
       set automatically when the host already uses <html data-theme>. */
 @media (prefers-color-scheme: dark) {
-  :host {
+  :where(:host) {
     --lp-bg: #1e293b;
     --lp-surface: #17233a;
     --lp-card-bg: #263449;
@@ -150,7 +166,7 @@ const STYLE = `
     --lp-selected-bg: #1f3a5f;
   }
 }
-:host([data-theme="dark"]) {
+:where(:host([data-theme="dark"])) {
   --lp-bg: #1e293b;
   --lp-surface: #17233a;
   --lp-card-bg: #263449;
@@ -163,7 +179,7 @@ const STYLE = `
   --lp-hover-bg: #2d3f57;
   --lp-selected-bg: #1f3a5f;
 }
-:host([data-theme="light"]) {
+:where(:host([data-theme="light"])) {
   --lp-bg: #ffffff;
   --lp-surface: #f4f4f2;
   --lp-card-bg: #ffffff;
