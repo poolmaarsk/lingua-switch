@@ -36,10 +36,18 @@ design reasoning behind these choices.
   N×N slice of the name/region matrices (not the full 76-wide rows —
   this is the real saving, since the component always uses
   `uiLangs = langs`), only the flags actually referenced, plus the
-  handful of small JS modules copied as-is (no bundler). Mirrors `src/`'s
-  relative layout exactly, so `language-picker.mjs`'s existing
-  `./generated/...` and `./assets/flags/...` fetches work unmodified.
-  Measured: sk+en+de → ~38KB, vs. ~1.3MB for the full unsubset dataset.
+  handful of small JS modules copied as-is by default (still no bundler
+  — `--minify`, see below, shrinks each one in place instead of
+  combining them). Mirrors `src/`'s relative layout exactly, so
+  `language-picker.mjs`'s existing `./generated/...` and
+  `./assets/flags/...` fetches work unmodified. Measured: sk+en+de →
+  ~38KB, vs. ~1.3MB for the full unsubset dataset (~43KB unminified /
+  ~27KB with `--minify` for just the six `.mjs` modules + generated data
+  + flags in that measurement — the exact split depends on flag count).
+  `--minify` uses esbuild (devDependency, imported lazily only when the
+  flag is passed) to strip whitespace/comments and shorten local
+  identifiers per file — never bundled, so the six modules keep
+  importing each other by the same relative paths either way.
 - `src/generated/*.json` — build output (languages, language-names,
   region-names). Regenerate all three with `npm run build:data` after
   touching anything in `src/data/`.

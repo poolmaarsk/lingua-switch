@@ -17,14 +17,15 @@ See [LAYOUT.md](LAYOUT.md) for the full file-by-file breakdown.
 ## Develop
 
 ```bash
-npm install            # only dev tooling (svgo) — the component itself ships zero dependencies
+npm install            # dev tooling (svgo, esbuild) — the component itself ships zero dependencies
 npm run build:data     # regenerate src/data/countries.json + src/generated/*.json
 npm test               # node --test test/*.test.mjs
 npm run dev            # serves the whole project at http://localhost:4174
                         #   - /demo/index.html for manual dev testing
                         #   - /showcase/index.html — the public-facing showcase page
 npm run optimize:flags # re-run svgo over src/assets/flags/ (after re-vendoring)
-npm run subset -- --langs sk,en,de --out ./dist/language-picker   # build a minimal drop-in bundle
+npm run subset -- --langs sk,en,de --out ./dist/language-picker            # unminified drop-in bundle
+npm run subset -- --langs sk,en,de --out ./dist/language-picker --minify  # same, with the 6 .mjs files minified
 npm run build:public   # build public/ — self-contained, deployable showcase (Cloudflare Pages etc.)
 ```
 
@@ -173,28 +174,29 @@ flag rendering, card-styled options, `forced-colors` support, and the
 full 76-language set loading and displaying correctly with no
 silently-wrong names anywhere — language names or region names).
 
-Also done: the build-time subsetting CLI, MIT licensing (+ the
-CC BY-SA note for vendored country data), pinned/vendored ISO source
-data, `fil` instead of deprecated `tl`, an XSS audit (no `innerHTML` +
-interpolation anywhere in the shipped component), and light/dark
-theming — CSS custom properties cross the shadow boundary, plus
-automatic `prefers-color-scheme` + live `<html data-theme>` sync (see
-"Theming, light/dark mode" above).
+Also done: the build-time subsetting CLI (now with an optional `--minify`
+pass, esbuild-powered — see "Develop" above; devDependency only, so a
+plain `npm install @poolmaarsk/lingua-switch` or an unflagged `npx
+lingua-switch-subset` stay exactly as dependency-free as before), MIT
+licensing (+ the CC BY-SA note for vendored country data),
+pinned/vendored ISO source data, `fil` instead of deprecated `tl`, an
+XSS audit (no `innerHTML` + interpolation anywhere in the shipped
+component), and light/dark theming — CSS custom properties cross the
+shadow boundary, plus automatic `prefers-color-scheme` + live
+`<html data-theme>` sync (see "Theming, light/dark mode" above).
 
-**npm package prepared but not yet published.** `package.json` is fully
-set up — scoped as `@poolmaarsk/lingua-switch` (the unscoped
-`lingua-switch` name is already taken by an unrelated package),
-`publishConfig.access: "public"`, `exports`/`main`/`sideEffects` set,
-`files` allowlisted to exactly the runtime surface. `npm publish
---dry-run` confirms a clean 113-file, ~454KB package with no warnings.
-Actual `npm publish` was attempted and failed:
-`403 Forbidden — Two-factor authentication or granular access token
-with bypass 2FA enabled is required to publish packages`. This is an
-npm *account* security policy, nothing to fix in this repo — needs 2FA
-enabled on the publishing npm account (or a granular access token with
-2FA bypass), then `npm publish` again.
+**Published to npm** as `@poolmaarsk/lingua-switch` — the earlier `403
+Forbidden` (2FA required on the publishing account) is resolved; `npm
+install @poolmaarsk/lingua-switch` works today. The CLI's `bin` entry
+also means a consumer can run `npx lingua-switch-subset --langs ... --out
+<dir>` with no local checkout of this repo at all.
 
-Not started: using this in plug-cost (deliberately deferred).
+**plug-cost is now a real consumer** — its settings popout embeds
+`<language-picker>` in place of its old hand-rolled link list, vendoring
+a subset built via `npx lingua-switch-subset` (unminified; that project
+minifies at its own build step instead — see its CLAUDE.md). This was
+the "first real consumer" test this project's design was waiting on;
+nothing about the API changed as a result.
 
 Known, deliberately deferred: at full 76-language scale with all 76 also
 used as the UI-language set, searching a short 2-letter code like `sk`

@@ -49,6 +49,7 @@
     "build:public": "node scripts/build-public.mjs"
   },
   "devDependencies": {
+    "esbuild": "^0.28.2",
     "svgo": "^4.0.2"
   }
 }

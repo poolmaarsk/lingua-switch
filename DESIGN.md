@@ -237,6 +237,18 @@ At 5 languages the whole thing (data + inlined flags + logic) should be a
 few KB, and inlining flag SVGs becomes viable — no third-party requests
 at all. At 77 languages it's a different product needing a CDN or sprite.
 
+**Addendum, post-implementation:** the actual CLI is `node scripts/subset.mjs`
+(published as the `lingua-switch-subset` bin), not the `npx language-picker
+build` shape sketched above — see README.md for the real invocation. It also
+gained an optional `--minify` flag (esbuild, per-file — the six `.mjs`
+modules stay separate files importing each other by relative path, matching
+this section's "no bundler needed" premise; only bundling them together
+would have broken it). Added on request after a PageSpeed Insights pass on
+plug-cost flagged the vendored, unminified copy of this bundle specifically.
+esbuild is a devDependency, imported lazily only when `--minify` is passed,
+so `npm install @poolmaarsk/lingua-switch` and a bare `npx
+lingua-switch-subset` stay dependency-free exactly as before.
+
 ---
 
 ## 6. Search and matching
@@ -632,11 +644,13 @@ The one `innerHTML` write in the file (building the shadow DOM skeleton
 in the constructor) interpolates only the `STYLE` constant — authored in
 this file, never derived from host or fetched data.
 
-**Later: plug-cost as first real consumer.** Deliberately deferred — not
-touching that project yet. When the API settles, replacing its
-hand-rolled `langSwitcher` is the honest test of whether this design
-works, and it exercises subsetting, path-prefix mode and root-relative
-hrefs at once.
+**plug-cost as first real consumer — DONE.** Replaced its hand-rolled
+`langSwitcher` link list; exercised subsetting, `path-prefix` mode and
+root-relative hrefs all at once, as intended. See plug-cost's own
+CLAUDE.md ("Language picker" section) for the integration details and
+the one theming gotcha that surfaced there (an internal
+`:host([data-theme="dark"])` rule outranking a plain host selector,
+fixed by wrapping the internal rule in `:where()`).
 
 ---
 
@@ -651,9 +665,12 @@ hrefs at once.
    (`path-prefix` / `query-param` / `none`)
 5. ✅ Custom-element packaging and the subsetting CLI (`scripts/subset.mjs`)
 
-What's left is narrower now: plug-cost as the first real consumer
-(deliberately deferred), and npm publishing — package.json is fully
-prepared (`@poolmaarsk/lingua-switch`, dry-run verified clean) but the
-actual `npm publish` is blocked on the publishing account's own 2FA
-setup, not on anything in this repo. See README.md's Status section for
-the exact error and fix.
+6. ✅ npm publish (`@poolmaarsk/lingua-switch`) and plug-cost as the first
+   real consumer — both done, see README.md's Status section.
+7. ✅ Optional `--minify` pass on `scripts/subset.mjs`'s output
+   (esbuild, devDependency-only so the zero-runtime-dependency claim
+   holds for anyone not using that flag) — a PageSpeed Insights pass on
+   plug-cost flagged its unminified vendored copy of this bundle.
+
+Nothing outstanding right now; see README.md's Status section for
+anything that surfaces later.

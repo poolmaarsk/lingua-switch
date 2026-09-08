@@ -14,6 +14,7 @@
 //
 // Usage:
 //   node scripts/subset.mjs --langs sk,en,de --out ./dist/language-picker
+//   node scripts/subset.mjs --langs sk,en,de --out ./dist/language-picker --minify
 //
 // The name-matrix subsetting is the real win, not just the language
 // list: the shipped component always uses uiLangs = langs (see
@@ -29,18 +30,19 @@ const root = path.join(__dirname, '..');
 const srcDir = path.join(root, 'src');
 
 function parseArgs(argv) {
-  const args = { langs: null, out: null };
+  const args = { langs: null, out: null, minify: false };
   for (let i = 0; i < argv.length; i++) {
     if (argv[i] === '--langs') args.langs = argv[++i];
     else if (argv[i] === '--out') args.out = argv[++i];
+    else if (argv[i] === '--minify') args.minify = true;
   }
   return args;
 }
 
-const { langs: langsArg, out: outArg } = parseArgs(process.argv.slice(2));
+const { langs: langsArg, out: outArg, minify } = parseArgs(process.argv.slice(2));
 
 if (!langsArg || !outArg) {
-  console.error('Usage: node scripts/subset.mjs --langs sk,en,de --out ./dist/language-picker');
+  console.error('Usage: node scripts/subset.mjs --langs sk,en,de --out ./dist/language-picker [--minify]');
   process.exit(1);
 }
 
@@ -102,9 +104,13 @@ for (const code of flagCodes) {
   copyFileSync(flagSrc, path.join(outDir, 'assets/flags', `${code}.svg`));
 }
 
-// The small pure-JS modules language-picker.mjs imports — copied as-is,
-// not bundled. They're a few KB each unminified; a bundler is a later
-// step (see README "Not started"), not required for a working drop-in.
+// The small pure-JS modules language-picker.mjs imports — copied as-is by
+// default, not bundled. They're a few KB each unminified; a bundler is a
+// later step (see README), not required for a working drop-in. --minify
+// (below) shrinks each file in place without bundling them together — they
+// keep importing each other by relative path exactly as they do in src/,
+// so this stays a "drop several files on a static server" output either
+// way, just a smaller one.
 const modules = [
   'language-picker.mjs',
   'match.mjs',
@@ -115,6 +121,40 @@ const modules = [
 ];
 for (const file of modules) {
   copyFileSync(path.join(srcDir, file), path.join(outDir, file));
+}
+
+if (minify) {
+  // esbuild is a devDependency here, not a runtime one — importing it lazily
+  // (only when --minify is actually passed) keeps `npm install
+  // @poolmaarsk/lingua-switch` and a plain `npx lingua-switch-subset` (no
+  // flag) exactly as dependency-free as before. A bare `npx
+  // lingua-switch-subset --minify` from OUTSIDE a checkout of this repo
+  // still won't find it, though: npx only installs a package's own
+  // (runtime) `dependencies`, never its devDependencies, so there is no
+  // node_modules/esbuild in that ephemeral install for this dynamic import
+  // to resolve. The error below says so and gives the one-line workaround
+  // (`npx -p esbuild -p @poolmaarsk/lingua-switch ...`, which puts both
+  // packages in the same temporary node_modules, where this DOES resolve).
+  let transform;
+  try {
+    ({ transform } = await import('esbuild'));
+  } catch {
+    console.error('subset --minify: esbuild is not installed.');
+    console.error('  In a checkout of this repo: npm install, then re-run.');
+    console.error('  Via npx from elsewhere: npx -p esbuild -p @poolmaarsk/lingua-switch lingua-switch-subset --minify ...');
+    process.exit(1);
+  }
+  for (const file of modules) {
+    const p = path.join(outDir, file);
+    // format:'esm', no bundle:true: minify each file's own whitespace and
+    // local identifiers only. Bundling would inline these files into one,
+    // which is exactly the "unbundled subset directory" contract this CLI
+    // exists to produce — a consumer's <script type="module"> and this
+    // file's own sibling imports both depend on these staying separate
+    // files at these same relative paths.
+    const { code } = await transform(readFileSync(p, 'utf8'), { loader: 'js', format: 'esm', minify: true });
+    writeFileSync(p, code);
+  }
 }
 
 function dirSize(dir) {
@@ -141,7 +181,8 @@ const formatKB = (bytes) => `${(bytes / 1024).toFixed(1)}KB`;
 
 console.log(`Subset for [${wantedTags.join(', ')}] written to ${path.relative(root, outDir)}`);
 console.log(`  ${subsetLanguages.length} languages, ${flagCodes.size} flags`);
-console.log(`  full src/: ${formatKB(fullSize)}  →  subset: ${formatKB(subsetSize)}`);
+console.log(`  full src/: ${formatKB(fullSize)}  →  subset: ${formatKB(subsetSize)}${minify ? ' (minified)' : ''}`);
+if (!minify) console.log(`  (pass --minify to shrink the ${modules.length} .mjs modules further)`);
 console.log(`\nHost usage:`);
 console.log(`  <script type="module" src="/path/to/${path.basename(outDir)}/language-picker.mjs"></script>`);
 console.log(`  <language-picker langs="${wantedTags.join(',')}" current="${wantedTags[0]}" mode="path-prefix"></language-picker>`);
