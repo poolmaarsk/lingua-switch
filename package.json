@@ -1,6 +1,6 @@
 {
   "name": "@poolmaarsk/lingua-switch",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "description": "lingua-switch — embeddable <language-picker> web component with translated-name/endonym pairs, curated flags, and locale-aware sorting.",
   "keywords": [

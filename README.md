@@ -111,14 +111,14 @@ JSON data, and the flag SVGs all resolve correctly from both):
 
 ```html
 <!-- jsDelivr, pinned to a version (recommended) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@poolmaarsk/lingua-switch@0.1.0/src/language-picker.mjs"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@poolmaarsk/lingua-switch@0.1.1/src/language-picker.mjs"></script>
 
 <!-- jsDelivr, always latest — convenient, but a new release can change
      behavior under you with no warning -->
 <script type="module" src="https://cdn.jsdelivr.net/npm/@poolmaarsk/lingua-switch/src/language-picker.mjs"></script>
 
 <!-- unpkg, pinned -->
-<script type="module" src="https://unpkg.com/@poolmaarsk/lingua-switch@0.1.0/src/language-picker.mjs"></script>
+<script type="module" src="https://unpkg.com/@poolmaarsk/lingua-switch@0.1.1/src/language-picker.mjs"></script>
 
 <language-picker langs="sk,en,de" current="en" mode="path-prefix"></language-picker>
 ```
