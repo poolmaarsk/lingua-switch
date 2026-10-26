@@ -1,4 +1,4 @@
-/*! lingua-switch — Copyright (c) 2026 lingua-switch project.
+/*! lingua-switch — Copyright (c) 2026 Poolmaarsk.
     MIT License. See /LICENSE. */
 
 // Trigger label selection — DESIGN.md §8's fallback chain, extracted as

@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*! lingua-switch — Copyright (c) 2026 lingua-switch project.
+/*! lingua-switch — Copyright (c) 2026 Poolmaarsk.
     MIT License. See /LICENSE. */
 
 // Build-time subsetting CLI — DESIGN.md §5. Today the component always

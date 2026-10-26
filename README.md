@@ -10,6 +10,12 @@ verified in a real browser. MIT licensed — see [LICENSE](LICENSE). See
 - Repository: <https://github.com/poolmaarsk/lingua-switch>
 - Live showcase: <https://linguaswitch.poolmaarsk.eu/>
 
+If you use lingua-switch on your site, a link back to
+<https://linguaswitch.poolmaarsk.eu/> is appreciated — but not required.
+The MIT license only asks that you keep the copyright notice and license
+text (the `/*!` banners at the top of each file survive minification, so
+just don't strip them).
+
 ## Layout
 
 See [LAYOUT.md](LAYOUT.md) for the full file-by-file breakdown.

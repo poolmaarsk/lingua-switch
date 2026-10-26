@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/*! lingua-switch — Copyright (c) 2026 lingua-switch project.
+/*! lingua-switch — Copyright (c) 2026 Poolmaarsk.
     MIT License. See /LICENSE. */
 
 // Precomputes "name of country C as written by a viewer of language V"

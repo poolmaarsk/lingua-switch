@@ -1,4 +1,4 @@
-/*! lingua-switch — Copyright (c) 2026 lingua-switch project.
+/*! lingua-switch — Copyright (c) 2026 Poolmaarsk.
     MIT License. See /LICENSE. */
 
 // ISO 639-1 primary language subtags that are written right-to-left.

@@ -610,7 +610,7 @@ files need their own line about it.
 
 **Licensing — DECIDED and IMPLEMENTED: MIT.** `LICENSE` at the project
 root, `"license": "MIT"` in `package.json`, and a `/*!` copyright banner
-(`Copyright (c) 2026 lingua-switch project`) at the top of every shipped
+(`Copyright (c) 2026 Poolmaarsk`) at the top of every shipped
 `src/*.mjs` file — deliberately using esbuild/terser's "legal comment"
 convention (leading `/*!`) so it survives minification once the
 subsetting CLI exists, not just today's unminified source. The specific

@@ -1,4 +1,4 @@
-/*! lingua-switch — Copyright (c) 2026 lingua-switch project.
+/*! lingua-switch — Copyright (c) 2026 Poolmaarsk.
     MIT License. See /LICENSE. */
 
 // Bridges the generated language-first table (tags + flags + raw country
