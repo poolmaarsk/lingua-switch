@@ -96,6 +96,32 @@ matters, use the drop-in script-tag approach below with `npm run subset` instead
 For production, point the `<script>` at a subset built with
 `npm run subset` instead of `src/` directly — see above.
 
+### From a CDN, zero install
+
+jsDelivr and unpkg both mirror npm automatically — nothing to publish or
+configure beyond the npm release itself. Verified end-to-end (not just
+the entry file: every relative import, the generated language/region
+JSON data, and the flag SVGs all resolve correctly from both):
+
+```html
+<!-- jsDelivr, pinned to a version (recommended) -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@poolmaarsk/lingua-switch@0.1.0/src/language-picker.mjs"></script>
+
+<!-- jsDelivr, always latest — convenient, but a new release can change
+     behavior under you with no warning -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@poolmaarsk/lingua-switch/src/language-picker.mjs"></script>
+
+<!-- unpkg, pinned -->
+<script type="module" src="https://unpkg.com/@poolmaarsk/lingua-switch@0.1.0/src/language-picker.mjs"></script>
+
+<language-picker langs="sk,en,de" current="en" mode="path-prefix"></language-picker>
+```
+
+This ships the full 76-language dataset, same as the npm install path —
+there's no CDN-hosted subset build. If bundle size matters, use `npm run
+subset` (or `npx lingua-switch-subset`) locally and host the resulting
+files yourself instead.
+
 - `langs` — comma-separated BCP-47 tags the host has translated.
 - `current` — the current page's language tag.
 - `mode`:
@@ -190,6 +216,12 @@ Forbidden` (2FA required on the publishing account) is resolved; `npm
 install @poolmaarsk/lingua-switch` works today. The CLI's `bin` entry
 also means a consumer can run `npx lingua-switch-subset --langs ... --out
 <dir>` with no local checkout of this repo at all.
+
+**Also available directly from jsDelivr and unpkg** — both mirror npm
+automatically, no separate publish step. Verified live: the entry file,
+every relative import, the generated language/region JSON, and the flag
+SVGs all resolve correctly from both CDNs — see "From a CDN, zero
+install" above for the exact `<script>` tags.
 
 **plug-cost is now a real consumer** — its settings popout embeds
 `<language-picker>` in place of its old hand-rolled link list, vendoring
